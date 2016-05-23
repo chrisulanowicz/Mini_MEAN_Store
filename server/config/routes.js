@@ -1,5 +1,6 @@
 var customers = require('./../controllers/customers.js');
 var orders = require('./../controllers/orders.js');
+var products = require('./../controllers/products.js');
 
 module.exports = function(app){
 
@@ -13,4 +14,7 @@ module.exports = function(app){
 
 	app.post('/orders', orders.create);
 
+	app.get('/products', products.index);
+
+	app.post('/products', products.create);
 }

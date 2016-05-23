@@ -27,8 +27,23 @@ myApp.factory('OrderFactory', function($http){
 		})
 	}
 	factory.create = function(order, callback){
-		console.log(order);
 		$http.post('/orders', order).success(callback);
+	}
+
+	return factory;
+});
+
+myApp.factory('ProductFactory', function($http){
+	var factory = {};
+
+	factory.index = function(callback){
+		$http.get('/products').success(function(output){
+			products = output;
+			callback(products);
+		})
+	}
+	factory.create = function(product, callback){
+		$http.post('/products', product).success(callback);
 	}
 
 	return factory;

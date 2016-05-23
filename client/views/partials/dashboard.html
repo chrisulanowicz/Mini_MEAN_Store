@@ -1,0 +1,24 @@
+<div>
+	<div id="top" ng-controller="ProductsController">
+		<form>
+			<input type="text" placeholder="search by name" ng-model="userInput.item" />
+			<input type="submit" value="Filter" ng-click="applySearch()"/>
+		</form>
+		<div class="item" ng-repeat="product in products | filter:search | limitTo: 5">
+			<img ng-src="{{ product.image }}" />
+			<h3>{{ product.item }}</h3>
+			<h5>({{ product.quantity }} left)</h5>
+		</div>
+		<a href="#/products">show more...</a>
+	</div>
+	<div id="middle" ng-controller="OrdersController">
+		<h3>Recent Orders</h3>
+		<p ng-repeat="order in orders | limitTo: 3">{{ order._customer.name }} purchased {{ order.quantity }} {{ order._product.item }}s ({{ order.timeago }})</p>
+		<a href="#/orders">show all orders...</a>
+	</div>
+	<div id="bottom" ng-controller="CustomersController">
+		<h3>New Customers</h3>
+		<p ng-repeat="customer in customers | limitTo: 3">{{ customer.name }} joined the store ({{ customer.timeago }})</p>
+		<a href="#/customers">show all customers...</a>
+	</div>
+</div>

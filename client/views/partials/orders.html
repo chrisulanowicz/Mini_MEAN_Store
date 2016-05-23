@@ -1,24 +1,28 @@
 <div ng-controller="OrdersController">
-	<h2>Add a new order</h2>
-	<form ng-controller="CustomersController">
-		<label for="customer">Customer</label>
-			<select id="customer" ng-model="newOrder._customer">
-				<option ng-repeat="customer in customers" value="{{ customer._id }}">{{ customer.name }}</option>
-			</select>
-			<select ng-model="newOrder.quantity">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-			<select ng-model="newOrder.product">
-				<option>Lobster Roll</option>
-				<option>Lobster Bisque</option>
-				<option>Lobster Tail</option>
-				<option>Lobster Claw</option>
-			</select>
-			<input type="submit" ng-click="addOrder(newOrder)">
+	<div ng-controller="ProductsController">
+		<h2>Add a new order <span>*Limit 5 items per order*</span></h2>
+		<form ng-controller="CustomersController">
+			<label for="customer">Customer</label>
+				<select id="customer" ng-model="newOrder._customer">
+					<option ng-repeat="customer in customers" value="{{ customer._id }}">{{ customer.name }}</option>
+				</select>
+				<select ng-model="newOrder.quantity">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
+				<select ng-model="newOrder._product">
+					<option ng-repeat="product in products" value="{{ product._id }}">{{ product.item }}</option>
+				</select>
+				<input type="submit" ng-click="addOrder(newOrder)">
+		</form>
+	</div>
+	<form>
+		<input type="text" placeholder="search by name" ng-model="userInput._customer.name" />
+		<input type="text" placeholder="search by product" ng-model="userInput._product.item" />
+		<input type="submit" value="Filter" ng-click="orderSearch()"/>
 	</form>
 	<table border="1">
 		<thead>
@@ -30,11 +34,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="order in orders">
+			<tr ng-repeat="order in orders | filter:search">
 				<td>{{ order._customer.name }}</td>
-				<td>{{ order.product }}</td>
+				<td>{{ order._product.item }}</td>
 				<td>{{ order.quantity }}</td>
-				<td>{{ order.created_at }}</td>
+				<td>{{ order.created_at | date }}</td>
 			</tr>
 		</tbody>
 	</table>

@@ -18,6 +18,8 @@ myApp.controller('CustomersController', function($scope, CustomerFactory){
 
 myApp.controller('OrdersController', function($scope, OrderFactory){
 
+	$scope.userInput = {};
+
 	function getOrders(){
 		OrderFactory.index(function(data){
 			$scope.orders = data;
@@ -26,9 +28,49 @@ myApp.controller('OrdersController', function($scope, OrderFactory){
 	getOrders();
 
 	$scope.addOrder = function(newOrder){
-		console.log($scope.$parent);
-		console.log($scope.newOrder);
-		// OrderFactory.create(newOrder, getOrders)
+		OrderFactory.create(newOrder, getOrders);
+		$scope.newOrder = {};
 	}
 
+	$scope.orderSearch = function(){
+		for(property in $scope.userInput){
+			$scope.search = {};
+			console.log($scope.userInput);
+			console.log(property);
+			console.log($scope.userInput[property]);
+			$scope.search[property] = $scope.userInput[property];
+			console.log($scope.search);
+			$scope.userInput = {};
+		}
+	}
+
+});
+
+myApp.controller('ProductsController', function($scope, ProductFactory){
+
+	$scope.userInput = {};
+
+	function getProducts(){
+		ProductFactory.index(function(data){
+			$scope.products = data;
+		})
+	}
+
+	getProducts();
+
+	$scope.addProduct = function(){
+		ProductFactory.create($scope.newProduct, getProducts);
+		$scope.newProduct = {};
+	}
+
+	$scope.applySearch = function(){
+		for(property in $scope.userInput){
+			$scope.search = {};
+			console.log($scope.userInput);
+			console.log(property);
+			console.log($scope.userInput[property]);
+			$scope.search[property] = $scope.userInput[property];
+			$scope.userInput = {};
+		}
+	}
 })

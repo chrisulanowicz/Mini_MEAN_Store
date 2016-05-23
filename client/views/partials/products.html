@@ -1,0 +1,23 @@
+<div ng-controller="ProductsController">
+	<div id="left">
+		<form>
+			<h2>Add a new product</h2>
+			<label for="name">Name: <input type="text" id="name" ng-model="newProduct.item" /></label>
+			<label for="image">Image (url): <input type="text" id="image" ng-model="newProduct.image" /></label>
+			<label for="description">Description: <textarea id="description" ng-model="newProduct.description" /></textarea></label>
+			<label for="quantity">Initial Quantity: <input type="Number" id="quantity" ng-model="newProduct.quantity" /></label>
+			<input type="submit" value="Add Product" ng-click="addProduct()" />
+		</form>
+	</div>
+	<div id="right">
+		<form>
+			<input type="text" placeholder="search by name" ng-model="userInput.item" />
+			<input type="submit" value="Filter" ng-click="applySearch()"/>
+		</form>
+		<div class="item" ng-repeat="product in products | filter:search">
+			<img ng-src="{{ product.image }}" />
+			<h3>{{ product.item }}</h3>
+			<h5>({{ product.quantity }} left)</h5>
+		</div>
+	</div>
+</div>
