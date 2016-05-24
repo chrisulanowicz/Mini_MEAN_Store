@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var CustomerSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: [true, 'Name is required'],
-		minlength: [6, 'Name has to be longer than that']
+		minlength: [6, 'Name has to be longer than that'],
+		unique: [true, 'Name already exists']
 	},
 	created_at: {
 		type: Date, 
@@ -16,4 +18,5 @@ var CustomerSchema = new mongoose.Schema({
 	}]
 })
 
+CustomerSchema.plugin(uniqueValidator, {message: 'Name already exists'});
 mongoose.model('Customer', CustomerSchema);
