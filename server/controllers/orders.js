@@ -32,7 +32,8 @@ module.exports = function(){
 			Product.findOne({_id: newOrder._product}, function(error, product){
 				newOrder.save(function(error){
 					if(error){
-						console.log(error);
+						res.status(400);
+						res.json(error);
 					}
 					else{
 						product.quantity -= newOrder.quantity;

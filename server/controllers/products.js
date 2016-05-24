@@ -17,7 +17,8 @@ module.exports = function(){
 			var newProduct = new Product(req.body);
 			newProduct.save(function(error){
 				if(error){
-					console.log(error);
+					res.status(400);
+					res.json(error);
 				}
 				else{
 					res.json(true);

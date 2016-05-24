@@ -7,8 +7,11 @@ myApp.factory('CustomerFactory', function($http){
 			callback(customers);
 		})
 	}
-	factory.create = function(customer, callback){
-		$http.post('/customers', customer).success(callback);
+	factory.create = function(customer, callback, errcallback){
+		$http.post('/customers', customer).success(callback).error(function(output){
+			errors = output;
+			errcallback(errors);
+		});
 	}
 	factory.delete = function(id, callback){
 		$http.delete('/customers/' + id).success(callback);
@@ -26,8 +29,11 @@ myApp.factory('OrderFactory', function($http){
 			callback(orders);
 		})
 	}
-	factory.create = function(order, callback){
-		$http.post('/orders', order).success(callback);
+	factory.create = function(order, callback, errcallback){
+		$http.post('/orders', order).success(callback).error(function(output){
+			errors = output;
+			errcallback(errors);
+		});
 	}
 
 	return factory;
@@ -42,8 +48,11 @@ myApp.factory('ProductFactory', function($http){
 			callback(products);
 		})
 	}
-	factory.create = function(product, callback){
-		$http.post('/products', product).success(callback);
+	factory.create = function(product, callback, errcallback){
+		$http.post('/products', product).success(callback).error(function(output){
+			errors = output;
+			errcallback(errors);
+		});
 	}
 
 	return factory;

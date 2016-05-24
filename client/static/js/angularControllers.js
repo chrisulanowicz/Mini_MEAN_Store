@@ -1,5 +1,7 @@
 myApp.controller('CustomersController', function($scope, CustomerFactory){
 
+	$scope.validationError = null;
+
 	function getCustomers(){
 		CustomerFactory.index(function(data){
 			$scope.customers = data;
@@ -8,7 +10,10 @@ myApp.controller('CustomersController', function($scope, CustomerFactory){
 	getCustomers();
 
 	$scope.addCustomer = function(){
-		CustomerFactory.create($scope.newCustomer, getCustomers);
+		$scope.validationError = null;
+		CustomerFactory.create($scope.newCustomer, getCustomers, function(errors){
+		$scope.validationError = errors;
+		});
 		$scope.newCustomer = {};
 	}
 	 $scope.removeCustomer = function(id){
@@ -19,6 +24,7 @@ myApp.controller('CustomersController', function($scope, CustomerFactory){
 myApp.controller('OrdersController', function($scope, OrderFactory){
 
 	$scope.userInput = {};
+	$scope.validationError = null;
 
 	function getOrders(){
 		OrderFactory.index(function(data){
@@ -28,7 +34,10 @@ myApp.controller('OrdersController', function($scope, OrderFactory){
 	getOrders();
 
 	$scope.addOrder = function(newOrder){
-		OrderFactory.create(newOrder, getOrders);
+		OrderFactory.create(newOrder, getOrders, function(errors){
+			$scope.validationError = errors;
+			console.log($scope.validationError);
+		});
 		$scope.newOrder = {};
 	}
 
@@ -49,6 +58,7 @@ myApp.controller('OrdersController', function($scope, OrderFactory){
 myApp.controller('ProductsController', function($scope, ProductFactory){
 
 	$scope.userInput = {};
+	$scope.validationError = null;
 
 	function getProducts(){
 		ProductFactory.index(function(data){
@@ -59,7 +69,9 @@ myApp.controller('ProductsController', function($scope, ProductFactory){
 	getProducts();
 
 	$scope.addProduct = function(){
-		ProductFactory.create($scope.newProduct, getProducts);
+		ProductFactory.create($scope.newProduct, getProducts, function(errors){
+			$scope.validationError = errors;
+		});
 		$scope.newProduct = {};
 	}
 

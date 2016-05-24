@@ -3,9 +3,21 @@
 		<form>
 			<h2>Add a new product</h2>
 			<label for="name">Name: <input type="text" id="name" ng-model="newProduct.item" /></label>
+			<div ng-if="validationError.errors['item'].kind" class="error">
+				{{ validationError.errors['item'].message }}
+			</div>
 			<label for="image">Image (url): <input type="text" id="image" ng-model="newProduct.image" /></label>
+			<div ng-if="validationError.errors['image'].kind" class="error">
+				{{ validationError.errors['image'].message }}
+			</div>
 			<label for="description">Description: <textarea id="description" ng-model="newProduct.description" /></textarea></label>
+			<div ng-if="validationError.errors['description'].kind" class="error">
+				{{ validationError.errors['description'].message }}
+			</div>
 			<label for="quantity">Initial Quantity: <input type="Number" id="quantity" ng-model="newProduct.quantity" /></label>
+			<div ng-if="validationError.errors['quantity'].kind" class="error">
+				{{ validationError.errors['quantity'].message }}
+			</div>
 			<input type="submit" value="Add Product" ng-click="addProduct()" />
 		</form>
 	</div>

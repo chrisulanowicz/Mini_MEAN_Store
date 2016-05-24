@@ -22,7 +22,8 @@ module.exports = function(){
 			var newCustomer = new customer(req.body);
 			newCustomer.save(function(error){
 				if(error){
-					console.log(error);
+					res.status(400);
+					res.json(error);
 				}
 				else{
 					res.json(newCustomer);

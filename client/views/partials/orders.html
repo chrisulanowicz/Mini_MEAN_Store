@@ -19,6 +19,15 @@
 				<input type="submit" ng-click="addOrder(newOrder)">
 		</form>
 	</div>
+				<div ng-if="validationError.errors['_customer'].kind" class="error">
+					{{ validationError.errors['_customer'].message }}
+				</div>
+				<div ng-if="validationError.errors['quantity'].kind" class="error">
+					{{ validationError.errors['quantity'].message }}
+				</div>
+				<div ng-if="validationError.errors['_product'].kind" class="error">
+					{{ validationError.errors['_product'].message }}
+				</div>
 	<form>
 		<input type="text" placeholder="search by name" ng-model="userInput._customer.name" />
 		<input type="text" placeholder="search by product" ng-model="userInput._product.item" />
