@@ -14,8 +14,20 @@
 	</style>
 </head>
 <body>
-	<div id="container">
-		<a href="#/dashboard">Dashboard </a> | <a href="#/products">Products </a> | <a href="#/orders">Orders </a> | <a href="#/customers">Customers </a> | <a href="#/settings"> Settings</a>
+	<div id="container" ng-controller="LoginController">
+		<a href="#/dashboard">Dashboard </a> | <a href="#/products">Products </a> | <a href="#/orders">Orders </a> | <a href="#/customers">Customers </a> | <a href="#/settings"> Settings</a> | <a href="" ng-click="logout()"> Logout</a>
+		<div id="login" ng-hide=loggedUser>
+			<form>
+				<fieldset>
+					<legend>Log-In</legend>
+					<label for="username">Name <input type="text" id="username" ng-model="newLogin.name" /></label>
+					<input type="submit" value="Login" ng-click="login()" />
+					<div ng-if="validationError.errors['name'].kind" class="error">
+						{{ validationError.errors['name'].message }}
+					</div>
+				</fieldset>
+			</form>
+		</div>
 		<div ng-view>
 		</div>
 	</div>

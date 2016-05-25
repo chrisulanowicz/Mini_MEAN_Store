@@ -1,11 +1,12 @@
 <div ng-controller="CustomersController">
-	<h2>Add a new customer</h2>
+	<!-- <h2>Add a new customer</h2>
 	<form>
 		<label for="name">Customer Name: <input type="text" id="name" ng-model="newCustomer.name"> <input type="submit" value="Add" ng-click="addCustomer()"></label>
 		<div ng-if="validationError.errors['name'].kind" class="error">
 			{{ validationError.errors['name'].message }}
 		</div>
-	</form>
+	</form> -->
+	{{ loggedUser.name }}
 	<input type="text" placeholder="Search name" ng-model="filter_name" />
 	<table border="1">
 		<thead>

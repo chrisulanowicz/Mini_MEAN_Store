@@ -14,6 +14,7 @@ myApp.factory('CustomerFactory', function($http){
 		});
 	}
 	factory.delete = function(id, callback){
+		console.log(id);
 		$http.delete('/customers/' + id).success(callback);
 	}
 
@@ -56,4 +57,46 @@ myApp.factory('ProductFactory', function($http){
 	}
 
 	return factory;
+});
+
+myApp.factory('LoginFactory', function($http){
+	var factory = {};
+	// var loggedUser = {};
+
+	factory.show = function(name, callback, errcallback){
+		var loggedUser = {};
+		var name = name.name;
+		// var name = name.name.toLowerCase();
+		console.log(name);
+		$http.get('/customers/' + name)
+			.success(function(output){
+				customer = output;
+				callback(customer);
+			})
+			.error(function(output){
+				problem = output;
+				errcallback(problem);
+			});
+	}
+
+	factory.authenticate = function(user, callback){
+		loggedUser = user;
+		callback(loggedUser);
+	}
+
+	// factory.getLoggedUser = function(){
+	// 	return loggedUser;
+	// }
+
+	factory.logout = function(){
+		loggedUser = null;
+	}
+	return factory;
 })
+
+
+
+
+
+
+

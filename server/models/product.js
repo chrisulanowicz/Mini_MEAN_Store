@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var ProductSchema = new mongoose.Schema({
 	item: {
 		type: String,
-		required: [true, 'Product name required']
+		required: [true, 'Product name required'],
+		minlength: [6, 'Must be at least 6 characters']
 	},
 	image: {
 		type: String,

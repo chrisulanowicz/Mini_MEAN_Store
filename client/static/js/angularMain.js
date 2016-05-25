@@ -17,4 +17,7 @@ myApp.config(function($routeProvider){
 		.when('/settings', {
 			templateUrl: 'views/partials/settings.html'
 		})
+		// .when('/logout', {
+		// 	templateUrl: 'index.html'
+		// })
 })

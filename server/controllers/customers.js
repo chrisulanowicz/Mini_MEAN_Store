@@ -30,6 +30,19 @@ module.exports = function(){
 				}
 			})
 		},
+		show: function(req, res){
+			console.log(req.params.name);
+			customer.findOne({name: req.params.name}, function(error, data){
+				if(error){
+					console.log(error);
+					res.status(400);
+					res.json(error);
+				}
+				else{
+					res.json(data);
+				}
+			})
+		},
 		delete: function(req, res){
 			customer.remove({_id: req.params.id}, function(error){
 				if(error){

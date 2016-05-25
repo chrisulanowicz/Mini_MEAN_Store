@@ -6,6 +6,8 @@ module.exports = function(app){
 
 	app.get('/customers', customers.index);
 
+	app.get('/customers/:name', customers.show);
+
 	app.post('/customers', customers.create);
 
 	app.delete('/customers/:id', customers.delete);
